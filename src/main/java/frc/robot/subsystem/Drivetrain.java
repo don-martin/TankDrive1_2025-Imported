@@ -1,5 +1,7 @@
 package frc.robot.subsystem;
 
+import org.photonvision.PhotonCamera;
+
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.controls.Follower;
@@ -23,10 +25,14 @@ public class Drivetrain extends SubsystemBase {
     TalonFX leftRear;      
 	TalonFX rightFront;
 	TalonFX rightRear;
+    public PhotonCamera camera;
+
     //Alert functionality available in WPILIB 2025 projects.
     Alert speedAlert = new Alert("You're driving too fast.",AlertType.kWarning);
 
     public Drivetrain() {
+        camera = new PhotonCamera("camera1"); // cameraName should match what is set on the camera.
+
         rightFront = new TalonFX(Constants.DRIVETRAIN_RIGHT_FRONT_PORT,"rio"); //Ports are the device id on the phoenix tuner
         leftFront = new TalonFX(Constants.DRIVETRAIN_LEFT_FRONT_PORT,"rio");    
         rightRear = new TalonFX(Constants.DRIVETRAIN_RIGHT_REAR_PORT,"rio");
