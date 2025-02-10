@@ -23,18 +23,15 @@ import frc.robot.subsystem.Drivetrain;
 public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
-  private Drivetrain m_drivetrain;
-  private PhotonCamera camera;
-  private Alert target2Found = new Alert("Target 2 Found.",AlertType.kWarning);
-  private Alert target3Found = new Alert("Target 3 Found.", AlertType.kWarning);
+  // private Drivetrain m_drivetrain;
+  // private PhotonCamera camera;
 
- 
   @Override
   public void robotInit() {
     
     m_robotContainer = new RobotContainer();
-    m_drivetrain = m_robotContainer.m_drivetrain;
-    camera = m_robotContainer.m_drivetrain.camera;
+    // m_drivetrain = m_robotContainer.m_drivetrain;
+    // camera = m_robotContainer.m_drivetrain.camera;
     
     //Live window in TEST mode provides a GUI that can be used to 
     //display status of sensors and actuators and directly set motor inputs/actuators.
@@ -44,46 +41,7 @@ public class Robot extends TimedRobot {
 
   
   @Override
-  public void teleopPeriodic() {
-
-    boolean targetVisible = false;
-    double targetYaw = 0.0;
-    double targetRange = 0.0;
-    var results = camera.getAllUnreadResults();
-    if (!results.isEmpty()) {
-            // Camera processed a new frame since last
-            // Get the last one in the list.
-            var result = results.get(results.size() - 1);
-            if (result.hasTargets()) {
-                // At least one AprilTag was seen by the camera
-                for (var target : result.getTargets()) {
-                    target2Found.set(target.getFiducialId() == 2);
-                    target3Found.set(target.getFiducialId() == 3);
-                    if (target.getFiducialId() > 0) {
-                        // Found Tag 7, record its information
-                        targetYaw = target.getYaw();
-                        System.out.println("Yaw: " + targetYaw);
-                        // if yaw is positive, turn to the right
-                        // if yaw is negative, turn to the left.
-                        // set this up so that it pivots in a circle until
-                        // a target is identified, then stops and hones in on the 
-                        // target.
-                        // read about the PID controller - there is a link in the 
-                        //photon code examples.
-                        /*targetRange =
-                                PhotonUtils.calculateDistanceToTargetMeters(
-                                        0.5, // Measured with a tape measure, or in CAD.
-                                        1.435, // From 2024 game manual for ID 7
-                                        Units.degreesToRadians(-30.0), // Measured with a protractor, or in CAD.
-                                        Units.degreesToRadians(target.getPitch()));
-
-                        targetVisible = true;*/
-                    }
-                }
-            }
-        }
-
-  } 
+  public void teleopPeriodic() {} 
 
   @Override
   public void robotPeriodic() {
