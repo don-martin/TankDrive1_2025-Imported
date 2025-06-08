@@ -80,6 +80,7 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public Command pivot() {
+        //this command seems to run forever.  does runOnce really stop after one iteration?
         SmartDashboard.putBoolean("bButton",RobotContainer.m_driverController.b().getAsBoolean());
         return Commands.runOnce(() -> drive(.5,-.5),this);
     }
@@ -117,10 +118,12 @@ public class Drivetrain extends SubsystemBase {
                     target2Found.set(target.getFiducialId() == 2);
                     target3Found.set(target.getFiducialId() == 3);
                     if (target.getFiducialId() == 2) {
-                        // Found Tag 7, record its information
+                        // Found Tag 2, record its information
                         targetYaw = target.getYaw();
                         System.out.println("Yaw: " + targetYaw);
                         //Command aim = new AimTank(this, target);
+                        // the following line should be changed to calling a command 
+                        //so that drive subsystem is reserved/interupted appropriately
                         drive((target.getYaw()/100)*(-1),target.getYaw()/100);
                         // if yaw is positive, turn to the right
                         // if yaw is negative, turn to the left.
@@ -139,7 +142,8 @@ public class Drivetrain extends SubsystemBase {
                     }
                 }
             } else {
-                drive(0,0);
+                //the command below didn't seem to run ever
+               // Commands.run(() -> drive(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightY()),this);
             }
         }
     }
