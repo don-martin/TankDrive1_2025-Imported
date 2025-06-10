@@ -141,10 +141,9 @@ public class Drivetrain extends SubsystemBase {
                         targetVisible = true;*/
                     }
                 }
-            } else {
-                //the command below didn't seem to run ever
-               // Commands.run(() -> drive(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightY()),this);
-            }
+            } 
+        } else {
+            Commands.run(() -> drive(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightY()),this);
         }
     }
 }
