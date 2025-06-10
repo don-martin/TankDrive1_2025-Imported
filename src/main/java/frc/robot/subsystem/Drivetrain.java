@@ -79,7 +79,7 @@ public class Drivetrain extends SubsystemBase {
 
     }
 
-    public Command pivot() {
+    public Command pivot() { 
         //this command seems to run forever.  does runOnce really stop after one iteration?
         SmartDashboard.putBoolean("bButton",RobotContainer.m_driverController.b().getAsBoolean());
         return Commands.runOnce(() -> drive(.5,-.5),this);
@@ -143,6 +143,9 @@ public class Drivetrain extends SubsystemBase {
                 }
             } 
         } else {
+            //  This is just a command.  it isn't actually doing anything.  Instead, need to trigger this somehow
+            //  or set a default command for this subsytem.
+            // or just call the drive method directly, however, then you don't get subsystem mgmt.
             Commands.run(() -> drive(RobotContainer.m_driverController.getLeftY(), RobotContainer.m_driverController.getRightY()),this);
         }
     }

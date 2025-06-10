@@ -16,7 +16,7 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-        m_driverController.b().whileTrue(m_drivetrain.pivot()).onFalse(Commands.runOnce(() -> m_drivetrain.drive(0,0)));
+        m_driverController.b().whileTrue(m_drivetrain.pivot()).onFalse(Commands.runOnce(() -> m_drivetrain.drive(0,0),m_drivetrain));
         m_driverController.x().onTrue(m_drivetrain.pivot180());
         
         //This will only set the initial values.  To have something continuously logged, use 
